@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
@@ -31,6 +32,16 @@ const FormInnerWrap = styled.div`
 `;
 
 export const LoginForm: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const clickHandler = (e: any) => {
+    e.preventDefault();
+    console.log("hello");
+    dispatch({
+      type: "USER_FETCH_REQUESTED1",
+      payload: "hello from handler"
+    });
+  };
   return (
     <Wrapper>
       <Content>
@@ -47,7 +58,7 @@ export const LoginForm: React.FC = () => {
               Запомнить меня
             </div>
             <div>
-              <button>Отправить</button>
+              <button onClick={clickHandler}>Отправить</button>
             </div>
           </FormInnerWrap>
         </form>
