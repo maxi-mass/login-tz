@@ -1,14 +1,12 @@
 import React from "react";
 import { Title, Wrapper } from "./styles";
 import Button from "@material-ui/core/Button";
+import { LoginForm } from "../../components/LoginForm";
 
 export const LoginPage: React.FC = () => {
   return (
-    <Wrapper>
-      <Title>Hello World!</Title>
-      <Button variant="contained" color="primary">
-        Some button
-      </Button>
-    </Wrapper>
+    <>
+      <LoginForm />
+    </>
   );
 };
