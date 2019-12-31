@@ -1,10 +1,10 @@
 import React from "react";
-import { LoginForm } from "../../components/LoginForm";
+import { Login } from "../../components/LoginForm";
 
 export const LoginPage: React.FC = () => {
   return (
     <>
-      <LoginForm />
+      <Login />
     </>
   );
 };

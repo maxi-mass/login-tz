@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { reduxForm, Field } from "redux-form";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -31,37 +32,46 @@ const FormInnerWrap = styled.div`
   justify-content: space-between;
 `;
 
-export const LoginForm: React.FC = () => {
-  const dispatch = useDispatch();
+const LoginForm: React.FC = (props: any) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field component="input" type="text" name="email" placeholder="email" />
+      </div>
+      <div>
+        <Field
+          component="input"
+          type="password"
+          name="password"
+          placeholder="password"
+        />
+      </div>
+      <div>
+        <Field type="checkbox" name="rememberMe" />
+        Запомнить меня
+      </div>
+      <div>
+        <button>Отправить</button>
+      </div>
+    </form>
+  );
+};
 
-  const clickHandler = (e: any) => {
-    e.preventDefault();
-    console.log("hello");
-    dispatch({
-      type: "USER_FETCH_REQUESTED1",
-      payload: "hello from handler"
-    });
+const LoginReduxForm = reduxForm({
+  form: "login",
+  onSubmit: formData => console.log("Hello", formData)
+})(LoginForm);
+
+export const Login: React.FC = () => {
+  const dispatch = useDispatch();
+  const handler = (formData: any) => {
+    console.log(formData);
   };
+
   return (
     <Wrapper>
       <Content>
-        <form>
-          <FormInnerWrap>
-            <div>
-              <input type="text" name="email" />
-            </div>
-            <div>
-              <input type="password" name="password" />
-            </div>
-            <div>
-              <input type="checkbox" name="remember_me" />
-              Запомнить меня
-            </div>
-            <div>
-              <button onClick={clickHandler}>Отправить</button>
-            </div>
-          </FormInnerWrap>
-        </form>
+        <LoginReduxForm />
       </Content>
     </Wrapper>
   );
