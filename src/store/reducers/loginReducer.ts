@@ -1,12 +1,16 @@
+import { SET_USER_DATA } from "../types";
+
 const initialState = {
-  isLogin: false,
-  loginToken: null
+  loginData: {}
 };
 
 export const loginReducer = (state: any = initialState, action: any) => {
   switch (action.type) {
-    case "REDUCER_TEST":
-      console.log(action);
+    case SET_USER_DATA:
+      return {
+        ...state,
+        loginData: action.payload
+      };
     default:
       return state;
   }

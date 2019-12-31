@@ -4,7 +4,6 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { AboutPage } from "./pages/AboutPage/AboutPage";
 import { Provider } from "react-redux";
 import store from "./store";
-import { useDispatch, useSelector } from "react-redux";
 
 const App: React.FC = () => {
   return (
@@ -12,8 +11,8 @@ const App: React.FC = () => {
       <BrowserRouter>
         <div className="container">
           <Switch>
-            <Route component={LoginPage} path="/" exact />
-            <Route component={AboutPage} path="/about" />
+            <Route component={AboutPage} path="/" exact />
+            <Route component={LoginPage} path="/login" />
           </Switch>
         </div>
       </BrowserRouter>

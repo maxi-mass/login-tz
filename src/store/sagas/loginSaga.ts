@@ -1,18 +1,27 @@
-import { put, takeEvery, call, all } from "redux-saga/effects";
+import { put, takeEvery, all } from "redux-saga/effects";
+import { USER_LOGIN, USER_LOGOUT, SET_USER_DATA } from "../types";
+import { getToken, removeToken } from "../../helpers";
 
-function* fetchUser(action: any) {
-  console.log(action);
+export function* userLogin(action: any) {
   try {
-    console.log(action);
-    //const user = yield call(Api.fetchUser, action.payload.userId);
-    yield put({ type: "REDUCER_TEST", payload: { jwt: Date.now() } });
-  } catch (e) {
-    yield put({ type: "USER_FETCH_FAILED", message: e.message });
-  }
+    let token = getToken(action.payload);
+
+    yield put({
+      type: SET_USER_DATA,
+      payload: { ...token, ...action.payload }
+    });
+  } catch (e) {}
 }
+
+export function* userLogout(action: any) {
+  try {
+    removeToken();
+  } catch (e) {}
+}
+
 export function* loginSaga() {
   yield all([
-    takeEvery("USER_FETCH_REQUESTED", fetchUser),
-    takeEvery("USER_FETCH_REQUESTED1", fetchUser)
+    takeEvery(USER_LOGIN, userLogin),
+    takeEvery(USER_LOGOUT, userLogout)
   ]);
 }
